@@ -251,6 +251,15 @@ impl Conference {
     // TODO
   }
 
+  pub async fn participant(&self, endpoint_id: &str) -> Result<Participant, bool> {
+    let locked_inner = self.inner.lock().await;
+
+    match locked_inner.participants.contains_key(endpoint_id) {
+        true => Ok(locked_inner.participants.get(endpoint_id).unwrap().clone()),
+        false => Err(false),
+    }
+  }
+
   pub fn endpoint_id(&self) -> Result<&str> {
     self.jid.endpoint_id()
   }

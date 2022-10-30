@@ -159,7 +159,7 @@ impl Connection {
       let locked_inner = self.inner.lock().await;
       ConferenceConfig {
         muc: format!(
-          "{}@conference.{}",
+          "{}@muc.{}",
           conference_name, locked_inner.xmpp_domain
         )
         .parse()?,
